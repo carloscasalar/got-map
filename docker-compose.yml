@@ -1,0 +1,10 @@
+version: '2'
+services:
+  db:
+    build:  
+      context: ./postgresql
+      args:
+        dbuser: gothrones
+        dbpass: sEnOrHtOg
+  ports:
+    - "5432:5432"

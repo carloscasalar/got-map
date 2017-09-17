@@ -5,3 +5,8 @@ This repository is the result of follow steps in tutorials [Build An Interactive
 I'll use [nestjs](http://nestjs.com/) instead of "naked" express. 
 
 I'll use dockerized verions of PostgreSQL and Redis.
+
+## PostgreSQL
+
+I'll use this postgis image: [mdillon/postgis](https://hub.docker.com/r/mdillon/postgis/) based on the [official alpine postgreSQL docker image](https://hub.docker.com/_/postgres/).
+
