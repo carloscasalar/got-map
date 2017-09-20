@@ -6,7 +6,7 @@ import { LoggerMiddleware } from './log/logger.middleware';
 @Module({
     modules: [LogModule],
 })
-export class ApplicationModule implements NestModule{
+export class ApplicationModule implements NestModule {
     configure(consumer: MiddlewaresConsumer): void | MiddlewaresConsumer {
         consumer.apply(LoggerMiddleware).forRoutes(
             { path: '/*', method: RequestMethod.ALL }

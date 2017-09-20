@@ -11,9 +11,6 @@
   "dependencies": {
     "@nestjs/common": "^4.0.0",
     "@nestjs/core": "^4.0.0",
-    "@nestjs/microservices": "^4.0.0",
-    "@nestjs/testing": "^4.0.0",
-    "@nestjs/websockets": "^4.0.0",
     "dotenv": "^4.0.0",
     "redis": "^2.7.1",
     "reflect-metadata": "^0.1.10",
@@ -23,6 +20,12 @@
   },
   "devDependencies": {
     "@types/node": "^8.0.28",
+    "@nestjs/testing": "^4.0.0",
     "ts-node": "^3.3.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:carloscasalar/got-map.git"
+  },
+  "private": true
 }

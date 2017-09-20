@@ -3,7 +3,7 @@ import { LoggerService } from './logger.service';
 
 @Middleware()
 export class LoggerMiddleware implements NestMiddleware {
-    constructor(private log: LoggerService){}
+    constructor(private log: LoggerService) { }
 
     resolve(...args: any[]): ExpressMiddleware {
         return async (req, res, next) => {
