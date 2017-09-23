@@ -10,7 +10,7 @@ export class LoggerMiddleware implements NestMiddleware {
             const start = Date.now();
             await next(); // This will pause this function until the endpoint handler has resolved
             const responseTime = Date.now() - start;
-            this.log.info(`${req.method} ${res.status} ${req.url} - ${responseTime} ms`)
+            this.log.info(`${req.method} ${res.status} ${req.url} - ${responseTime} ms`);
         };
     }
 }

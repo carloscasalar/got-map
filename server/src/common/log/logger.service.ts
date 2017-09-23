@@ -9,22 +9,22 @@ const logger = (process['console'] as any);
 @Component()
 export class LoggerService implements ILogger {
     public debug(message: string, ...supportingData: any[]): void {
-        this.emitLogMessage("debug", message, supportingData);
+        this.emitLogMessage('debug', message, supportingData);
     }
 
     public warn(message: string, ...supportingData: any[]): void {
-        this.emitLogMessage("warn", message, supportingData);
+        this.emitLogMessage('warn', message, supportingData);
     }
 
     public error(message: string, ...supportingData: any[]): void {
-        this.emitLogMessage("error", message, supportingData);
+        this.emitLogMessage('error', message, supportingData);
     }
 
     public info(message: string, ...supportingData: any[]): void {
-        this.emitLogMessage("info", message, supportingData);
+        this.emitLogMessage('info', message, supportingData);
     }
 
-    private emitLogMessage(msgType: "debug"| "info"| "warn"| "error", msg: string, supportingData: any[]) {
+    private emitLogMessage(msgType: 'debug'| 'info'| 'warn'| 'error', msg: string, supportingData: any[]) {
         if (process.env.NODE_ENV === 'CI') {
             return;
         }
