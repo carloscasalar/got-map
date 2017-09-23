@@ -1,8 +1,11 @@
 import { NestFactory } from '@nestjs/core';
-import { ApplicationModule } from './modules/app.module';
+import { ApplicationModule } from './common/app.module';
+import { PortResolver } from './component/config/port-resolver';
 
 async function bootstrap() {
   const app = await NestFactory.create(ApplicationModule);
-  await app.listen(3000);
+  const defaultPort = 3000;
+  const portResolver = new PortResolver({ defaultPort });
+  await app.listen(portResolver.resolvePort());
 }
 bootstrap();
