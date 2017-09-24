@@ -4,5 +4,7 @@ services:
     build:  
       context: ./postgresql
       args:
-        dbuser: gothrones
-        dbpass: sEnOrHtOg
+        dbuser: ${DB_USER}
+        dbpass: ${DB_PASS}
+    ports:
+      - 5432:5432
