@@ -48,8 +48,9 @@
         "one-variable-per-declaration": [
             false
         ],
-        "space-before-function-paren": [true],
-        "semicolon": [true, "always"]
+        "space-before-function-paren": false,
+        "semicolon": [true, "always"],
+        "trailing-comma": [true, {"multiline": "never", "singleline": "never"}]
     },
     "rulesDirectory": []
 }
