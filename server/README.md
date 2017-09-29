@@ -14,5 +14,5 @@ $ npm run start
 
 ### Endpoints
 
-*/time*
+#### /time
 This endpoints returns a JSON with attribute `now` witch value is the database time.

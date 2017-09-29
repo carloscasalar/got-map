@@ -9,5 +9,4 @@ import { TimeController } from './time.controller';
     controllers: [TimeController]
 })
 export class TimeModule {
-
 }

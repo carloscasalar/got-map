@@ -1,4 +1,4 @@
-import { Module, NestModule, RequestMethod } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { LogModule } from '../log/log.module';
 import { Db } from './db';
 
@@ -13,5 +13,4 @@ const DatabaseClient = database.getResolver();
     exports: [DatabaseClient]
 })
 export class DbModule {
-
 }

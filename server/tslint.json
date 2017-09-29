@@ -7,7 +7,7 @@
         "no-unused-expression": true
     },
     "rules": {
-        "eofline": false,
+        "eofline": true,
         "quotemark": [
             true,
             "single"
@@ -50,7 +50,9 @@
         ],
         "space-before-function-paren": false,
         "semicolon": [true, "always"],
-        "trailing-comma": [true, {"multiline": "never", "singleline": "never"}]
+        "trailing-comma": [true, {"multiline": "never", "singleline": "never"}],
+        "no-consecutive-blank-lines": true,
+        "indent": [true, "spaces", 4]
     },
     "rulesDirectory": []
 }
