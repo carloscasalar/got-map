@@ -2,20 +2,15 @@ import { Module, NestModule, RequestMethod } from '@nestjs/common';
 import { LogModule } from './log/log.module';
 import { MiddlewaresConsumer } from '@nestjs/common/interfaces/middlewares';
 import { LoggerMiddleware } from './log/logger.middleware';
-import { Db } from './db/db';
-
-const database = new Db(process.env.DATABASE_URL);
+import { TimeModule } from './time/time.module';
 
 @Module({
-    modules: [LogModule],
-    components: [
-        database.getResolver()
-    ]
+    modules: [LogModule, TimeModule]
 })
 export class ApplicationModule implements NestModule {
     configure(consumer: MiddlewaresConsumer): void | MiddlewaresConsumer {
         consumer.apply(LoggerMiddleware).forRoutes(
-            { path: '/*', method: RequestMethod.ALL }
+            {path: '/*', method: RequestMethod.ALL}
         );
     }
 

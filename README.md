@@ -10,3 +10,12 @@ I'll use dockerized verions of PostgreSQL and Redis.
 
 I'll use this postgis image: [mdillon/postgis](https://hub.docker.com/r/mdillon/postgis/) based on the [official alpine postgreSQL docker image](https://hub.docker.com/_/postgres/).
 
+## Run application
+To run the current version of application first start database with `docker-compose up`. 
+Then go to `/server` and run `npm start`.
+
+At this time the only endpoint implemented is `/time` witch shows database actual time.
+
+By default, server will listen in port 3000.
+
+Currently the docker-compose does not contains server configuration, only database.
