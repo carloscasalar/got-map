@@ -24,14 +24,14 @@ export class LoggerService implements ILogger {
         this.emitLogMessage('info', message, supportingData);
     }
 
-    private emitLogMessage(msgType: 'debug'| 'info'| 'warn'| 'error', msg: string, supportingData: any[]) {
+    private emitLogMessage(msgType: 'debug' | 'info' | 'warn' | 'error', msg: string, supportingData: any[]) {
         if (process.env.NODE_ENV === 'CI') {
             return;
         }
 
         if (supportingData.length > 0) {
             logger[msgType](msg, supportingData);
-        }else {
+        } else {
             logger[msgType](msg);
         }
     }

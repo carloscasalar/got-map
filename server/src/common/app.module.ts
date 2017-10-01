@@ -13,5 +13,4 @@ export class ApplicationModule implements NestModule {
             {path: '/*', method: RequestMethod.ALL}
         );
     }
-
 }
