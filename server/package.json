@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node index.js",
     "prestart:prod": "tsc",
-    "start:prod": "node dist/server.js"
+    "start:prod": "node dist/server.js",
+    "pretest": "tsc",
+    "test": "mocha --opts ./mocha.opts"
   },
   "dependencies": {
     "@nestjs/common": "^4.0.0",
@@ -24,7 +26,12 @@
   },
   "devDependencies": {
     "@nestjs/testing": "^4.0.0",
+    "@types/chai": "^4.0.4",
+    "@types/mocha": "^2.2.43",
     "@types/node": "^8.0.28",
+    "chai": "^4.1.2",
+    "mocha": "^3.5.3",
+    "mocha-typescript": "^1.1.9",
     "ts-node": "^3.3.0",
     "tslint": "^5.7.0"
   },

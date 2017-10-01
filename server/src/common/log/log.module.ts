@@ -3,7 +3,7 @@ import { LoggerService } from './logger.service';
 
 @Module({
     components: [ LoggerService ],
-    exports: [ LoggerService ],
+    exports: [ LoggerService ]
 })
 export class LogModule {
 

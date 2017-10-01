@@ -3,7 +3,7 @@ import { LoggerService } from '../log/logger.service';
 import { IResolver } from '../../component/nest/iresolver.interface';
 import { DbConnectionException } from './db-connection.exception';
 
-export const token: string = 'AsyncDbConnection';
+export const DatabaseClient: string = 'DatabaseClient';
 
 export class Db {
 
@@ -20,7 +20,7 @@ export class Db {
 
     public getResolver(): IResolver<Client>{
         return {
-            provide: token,
+            provide: DatabaseClient,
             useFactory: async (log: LoggerService) => {
                 try{
                     const start = Date.now();
