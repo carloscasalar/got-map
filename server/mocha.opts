@@ -1,0 +1,4 @@
+--recursive
+--ui mocha-typescript
+--require source-map-support/register
+dist/**/*.spec.js

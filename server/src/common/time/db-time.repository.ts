@@ -3,7 +3,7 @@ import { DatabaseClient } from '../db/db';
 import { Client } from 'pg';
 
 export interface INowResult {
-    now: number;
+    now: Date;
 }
 
 @Component()
