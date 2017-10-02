@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - "8"
+cache:
+  directories:
+    - "server/node_modules"
+before_script:
+  - cd server
+  - npm install
+script: npm test

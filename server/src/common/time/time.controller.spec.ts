@@ -12,7 +12,7 @@ describe('Time Controller tests', () => {
     });
 
     describe('getTime', () => {
-        it('should return an array of cats', async () => {
+        it('should return the result of call queryTime from repository', async () => {
             const result: INowResult = {now: new Date()};
 
             when(dbTimeRepositoryMock.queryTime()).thenReturn(Promise.resolve(result));
