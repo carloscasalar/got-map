@@ -1,6 +1,6 @@
 import { Component, Inject } from '@nestjs/common';
-import { DatabaseClient } from '../db/db';
 import { Client } from 'pg';
+import { DatabaseClient } from '../db/db';
 
 @Component()
 export class PlaceRepository {
@@ -9,7 +9,7 @@ export class PlaceRepository {
 
     async getLocations(type: string): Promise<ILocation[]> {
         const locationQuery = `
-                SELECT ST_AsGeoJSON(geog) as geoson, name, type, gid
+                SELECT ST_AsGeoJSON(geog) as geojson, name, type, gid
                 FROM locations
                 WHERE UPPER(type) = UPPER($1);`;
         const {rows} = await this.client.query(locationQuery, [type]);
@@ -18,7 +18,7 @@ export class PlaceRepository {
 
     async getKingdomBoundaries(): Promise<IKingdomBoundary[]> {
         const boundaryQuery = `
-                SELECT ST_AsGeoJSON(geog) as geoson, name, gid
+                SELECT ST_AsGeoJSON(geog) as geojson, name, gid
                 FROM kingdoms;`;
         const {rows} = await this.client.query(boundaryQuery);
         return rows;
@@ -26,14 +26,14 @@ export class PlaceRepository {
 }
 
 export interface ILocation {
-    geoson: string;
+    geojson: string;
     name: string;
     type: string;
     gid: string;
 }
 
 export interface IKingdomBoundary {
-    geoson: string;
+    geojson: string;
     name: string;
     gid: string;
 }
