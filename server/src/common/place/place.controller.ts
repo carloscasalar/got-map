@@ -40,7 +40,7 @@ export class PlaceController {
     }
 }
 
-interface IGeoJSON {
+export interface IGeoJSON {
     properties: IGeoJSONProperties;
 }
 interface IGeoJSONProperties{
