@@ -9,26 +9,26 @@ export class Db {
 
     private client: Client;
 
-    constructor (connectionString: string) {
+    constructor(connectionString: string) {
         this.client = new Client({connectionString});
     }
 
-    private async connect(){
+    private async connect() {
         await this.client.connect();
         return this.client;
     }
 
-    public getResolver(): IResolver<Client>{
+    public getResolver(): IResolver<Client> {
         return {
             provide: DatabaseClient,
             useFactory: async (log: LoggerService) => {
-                try{
+                try {
                     const start = Date.now();
                     const connection = await this.connect();
                     const responseTime = Date.now() - start;
                     log.info(`Database connection established - ${responseTime} ms`);
                     return connection;
-                }catch (e){
+                } catch (e) {
                     log.error('Error while connecting to database', e);
                     throw new DbConnectionException();
                 }
