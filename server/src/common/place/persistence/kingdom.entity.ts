@@ -1,4 +1,5 @@
 export interface KingdomEntity {
-    id: number;
-    size: number;
+    geojson: string;
+    name: string;
+    gid: string;
 }

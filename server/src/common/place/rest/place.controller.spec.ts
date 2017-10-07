@@ -1,14 +1,19 @@
-import { IGeoJSON, PlaceController } from './place.controller';
 import { anyString, instance, mock, when } from 'ts-mockito';
 import { expect } from 'chai';
-import { IKingdomBoundary, ILocation, PlaceRepository } from '../persistence/place.repository';
+import { Kingdom } from '../domain/kingdom.model';
+import { KingdomRepository } from '../persistence/kingdom.repository';
+import { ILocation, PlaceRepository } from '../persistence/place.repository';
+import { PlaceController } from './place.controller';
+import { BoundariesWrapper } from '../domain/boundaries-wrapper.model';
 
 describe('Place Controller tests', () => {
     let placeRepositoryMock: PlaceRepository;
+    let kingdomRepositoryMock: KingdomRepository;
     let placeController: PlaceController;
 
     beforeEach(() => {
         placeRepositoryMock = mock(PlaceRepository);
+        kingdomRepositoryMock = mock(KingdomRepository);
     });
 
     describe('getLocations', () => {
@@ -17,10 +22,11 @@ describe('Place Controller tests', () => {
 
             when(placeRepositoryMock.getLocations(anyString())).thenReturn(Promise.resolve([result]));
             const placeRepository = instance(placeRepositoryMock);
+            const kingdomRepository = instance(kingdomRepositoryMock);
 
-            placeController = new PlaceController(placeRepository);
+            placeController = new PlaceController(placeRepository, kingdomRepository);
 
-            const expectedResult: IGeoJSON = {
+            const expectedResult: BoundariesWrapper = {
                 properties: {
                     id: 'id',
                     type: 'Castle',
@@ -34,14 +40,15 @@ describe('Place Controller tests', () => {
 
     describe('getKingdomsBoundaries', () => {
         it('should get all kingdoms boundaries', async () => {
-            const result: IKingdomBoundary = {gid: 'id', geojson: '{}', name: 'Winterfell'};
+            const result: Kingdom = new Kingdom('id', 'Winterfell');
 
-            when(placeRepositoryMock.getKingdomBoundaries()).thenReturn(Promise.resolve([result]));
+            when(kingdomRepositoryMock.getAllKingdoms()).thenReturn(Promise.resolve([result]));
             const placeRepository = instance(placeRepositoryMock);
+            const kingdomRepository = instance(kingdomRepositoryMock);
 
-            placeController = new PlaceController(placeRepository);
+            placeController = new PlaceController(placeRepository, kingdomRepository);
 
-            const expectedResult: IGeoJSON = {
+            const expectedResult: BoundariesWrapper = {
                 properties: {
                     id: 'id',
                     name: 'Winterfell'
