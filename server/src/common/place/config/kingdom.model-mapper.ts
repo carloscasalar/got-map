@@ -6,10 +6,7 @@ import { KingdomEntity } from '../persistence/kingdom.entity';
 @Component()
 export class KingdomModelMapper {
     public toKingdom(kingdomEntity: KingdomEntity): Kingdom {
-        let boundaries: Boundaries;
-        if (kingdomEntity.geojson){
-            boundaries = new Boundaries(kingdomEntity.geojson);
-        }
+        const boundaries: Boundaries = new Boundaries(kingdomEntity.geojson);
         return new Kingdom(kingdomEntity.gid, kingdomEntity.name, boundaries);
     }
 }
