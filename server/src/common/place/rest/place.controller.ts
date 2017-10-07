@@ -1,6 +1,6 @@
 import { Controller, Get, HttpStatus, Param } from '@nestjs/common';
 import { HttpException } from '@nestjs/core';
-import { PlaceRepository } from './place.repository';
+import { PlaceRepository } from '../persistence/place.repository';
 
 @Controller()
 export class PlaceController {

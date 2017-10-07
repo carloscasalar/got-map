@@ -1,6 +1,6 @@
 import { Component, Inject } from '@nestjs/common';
 import { Client } from 'pg';
-import { DatabaseClient } from '../db/db';
+import { DatabaseClient } from '../../db/db';
 
 @Component()
 export class PlaceRepository {

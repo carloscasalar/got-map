@@ -1,7 +1,7 @@
 import { IGeoJSON, PlaceController } from './place.controller';
 import { anyString, instance, mock, when } from 'ts-mockito';
 import { expect } from 'chai';
-import { IKingdomBoundary, ILocation, PlaceRepository } from './place.repository';
+import { IKingdomBoundary, ILocation, PlaceRepository } from '../persistence/place.repository';
 
 describe('Place Controller tests', () => {
     let placeRepositoryMock: PlaceRepository;
