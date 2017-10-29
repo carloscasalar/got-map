@@ -30,4 +30,14 @@ export class PlaceController {
 
         return kingdoms.map((kingdom) => kingdom.getLocation());
     }
+
+    @Get('kingdoms/:id/size')
+    async getKingdomSize(@Param('id') id: string): Promise<number> {
+        const kingdom = await this.kingdomRepository.getKingdomById(id);
+        if (!kingdom) {
+            throw new KingdomsNotFoundException();
+        }
+
+        return kingdom.size.squareKilometers;
+    }
 }

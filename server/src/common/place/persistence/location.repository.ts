@@ -17,11 +17,11 @@ export class LocationRepository implements ILocationRepository {
                 SELECT ST_AsGeoJSON(geog) as geojson, name, type, gid
                 FROM locations
                 WHERE UPPER(type) = UPPER($1);`;
-        const {rows}: LocationQuery = await this.client.query(locationQuery, [type]);
+        const {rows}: LocationQueryResult = await this.client.query(locationQuery, [type]);
         return rows.map(location => this.modelMapper.toLocation(location));
     }
 }
 
-export interface LocationQuery {
+export interface LocationQueryResult {
     rows: LocationEntity[];
 }

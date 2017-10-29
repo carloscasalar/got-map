@@ -14,13 +14,23 @@ export class KingdomRepository implements IKingdomRepository {
 
     async getAllKingdoms(): Promise<Kingdom[]> {
         const allKingdomsQuery = `
-                SELECT ST_AsGeoJSON(geog) as geojson, name, gid
+                SELECT ST_AsGeoJSON(geog) as geojson, ST_AREA(geog) as size, name, gid
                 FROM kingdoms;`;
-        const result: KingdomQuery = await this.client.query(allKingdomsQuery);
+        const result: KingdomQueryResult = await this.client.query(allKingdomsQuery);
         return result.rows.map(row => this.modelMapper.toKingdom(row));
+    }
+
+    async getKingdomById(id: string): Promise<Kingdom> {
+        const kingdomByIdQuery = `
+                SELECT ST_AsGeoJSON(geog) as geojson, ST_AREA(geog) as size, name, gid
+                FROM kingdoms
+                WHERE gid = $1
+                LIMIT(1);`;
+        const result: KingdomQueryResult = await this.client.query(kingdomByIdQuery, [id]);
+        return result.rows[0] ? this.modelMapper.toKingdom(result.rows[0]) : null;
     }
 }
 
-interface KingdomQuery {
+interface KingdomQueryResult {
     rows: KingdomEntity[];
 }

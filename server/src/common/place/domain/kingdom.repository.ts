@@ -1,5 +1,7 @@
 import { Kingdom } from './kingdom.model';
 
 export interface IKingdomRepository {
-    getAllKingdoms(id: number): Promise<Kingdom[]>;
+    getAllKingdoms(): Promise<Kingdom[]>;
+
+    getKingdomById(id: string): Promise<Kingdom>;
 }
