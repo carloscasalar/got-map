@@ -4,6 +4,7 @@ import { KingdomRepository } from '../persistence/kingdom.repository';
 import { KingdomsNotFoundException } from '../domain/kingdoms-not-found.exception';
 import { Location } from '../domain/location.model';
 import { LocationNotFoundException } from '../domain/location-not-found.exception';
+import { Count } from '../domain/kingdom.repository';
 
 @Controller()
 export class PlaceController {
@@ -39,5 +40,12 @@ export class PlaceController {
         }
 
         return kingdom.size.squareKilometers;
+    }
+
+    @Get('kingdoms/:id/castles')
+    async countCastlesInKingdom(@Param('id') id: string): Promise<Count> {
+        const count = await this.kingdomRepository.countLocationsByKingdom(id, 'Castle');
+
+        return count;
     }
 }

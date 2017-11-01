@@ -25,3 +25,6 @@ Returns the list of kingdoms with each of its boundaries.
 
 #### /kingdoms/:id/size
 Returns the size in Km<sup>2</sup> of kingdom with id `:id`.
+
+#### /kingdoms/:id/castles
+Returns the count of castles in kingdom with id `:id`.

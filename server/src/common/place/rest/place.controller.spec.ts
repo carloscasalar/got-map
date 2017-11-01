@@ -117,4 +117,23 @@ describe('Place Controller tests', () => {
             }
         });
     });
+
+    describe('countCastlesInKingdom', () => {
+        let WINTERFELL_ID;
+        beforeEach('setting common constants', () => {
+            WINTERFELL_ID = 'id';
+        });
+
+        it('should return castles count of the kingdom', async () => {
+            const count = 10;
+            when(kingdomRepositoryMock.countLocationsByKingdom(WINTERFELL_ID, 'Castle'))
+                .thenReturn(Promise.resolve({count}));
+            const placeRepository = instance(locationRepositoryMock);
+            const kingdomRepository = instance(kingdomRepositoryMock);
+
+            placeController = new PlaceController(placeRepository, kingdomRepository);
+
+            expect(await placeController.countCastlesInKingdom(WINTERFELL_ID)).to.be.eql({count: 10});
+        });
+    });
 });

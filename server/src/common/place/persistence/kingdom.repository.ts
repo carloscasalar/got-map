@@ -2,7 +2,7 @@ import { Component, Inject } from '@nestjs/common';
 import { Client } from 'pg';
 import { DatabaseClient } from '../../db/db';
 import { KingdomModelMapper } from '../config/kingdom.model-mapper';
-import { IKingdomRepository } from '../domain/kingdom.repository';
+import { Count, IKingdomRepository } from '../domain/kingdom.repository';
 import { Kingdom } from '../domain/kingdom.model';
 import { KingdomEntity } from './kingdom.entity';
 
@@ -28,6 +28,17 @@ export class KingdomRepository implements IKingdomRepository {
                 LIMIT(1);`;
         const result: KingdomQueryResult = await this.client.query(kingdomByIdQuery, [id]);
         return result.rows[0] ? this.modelMapper.toKingdom(result.rows[0]) : null;
+    }
+
+    async countLocationsByKingdom(kingdomId: string, locationType: string): Promise<Count> {
+        const countQuery = `
+                SELECT count(*)
+                FROM kingdoms, locations
+                WHERE ST_intersects(kingdoms.geog, locations.geog)
+                AND kingdoms.gid = $1
+                AND locations.type = $2;`;
+        const {rows} = await this.client.query(countQuery, [ kingdomId, locationType ]);
+        return rows[0];
     }
 }
 
