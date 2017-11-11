@@ -5,6 +5,7 @@ import { KingdomsNotFoundException } from '../domain/kingdoms-not-found.exceptio
 import { Location } from '../domain/location.model';
 import { LocationNotFoundException } from '../domain/location-not-found.exception';
 import { Count } from '../domain/kingdom.repository';
+import { IdValidatorPipe } from './validators/id.validator';
 
 @Controller()
 export class PlaceController {
@@ -33,7 +34,7 @@ export class PlaceController {
     }
 
     @Get('kingdoms/:id/size')
-    async getKingdomSize(@Param('id') id: string): Promise<number> {
+    async getKingdomSize(@Param('id', new IdValidatorPipe()) id: string): Promise<number> {
         const kingdom = await this.kingdomRepository.getKingdomById(id);
         if (!kingdom) {
             throw new KingdomsNotFoundException();
@@ -43,7 +44,7 @@ export class PlaceController {
     }
 
     @Get('kingdoms/:id/castles')
-    async countCastlesInKingdom(@Param('id') id: string): Promise<Count> {
+    async countCastlesInKingdom(@Param('id', new IdValidatorPipe()) id: string): Promise<Count> {
         const count = await this.kingdomRepository.countLocationsByKingdom(id, 'Castle');
 
         return count;
