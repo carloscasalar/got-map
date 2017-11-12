@@ -8,6 +8,8 @@ import { Location } from '../domain/location.model';
 import { Boundaries } from '../domain/boundaries.model';
 import { Size } from '../domain/size.model';
 import { KingdomsNotFoundException } from '../domain/kingdoms-not-found.exception';
+import { LocationType } from '../domain/location-type.enum';
+import { CoordinateType } from '../domain/coordinate-type.enum';
 
 describe('Place Controller tests', () => {
     let locationRepositoryMock: LocationRepository;
@@ -22,7 +24,7 @@ describe('Place Controller tests', () => {
     describe('getLocations', () => {
         it('should call get all locations from repository', async () => {
             const result: Location = {
-                type: 'Point',
+                type: CoordinateType.Point,
                 coordinates: [
                     14.3312151315039,
                     -6.02925834324263
@@ -30,7 +32,7 @@ describe('Place Controller tests', () => {
                 properties: {
                     id: 'id',
                     name: 'Winterfell',
-                    type: 'Castle'
+                    type: LocationType.castle
                 }
             };
 
@@ -42,7 +44,7 @@ describe('Place Controller tests', () => {
 
             placeController = new PlaceController(locationRepository, kingdomRepository);
 
-            expect(await placeController.getLocations('a location')).to.be.eql([expectedResult]);
+            expect(await placeController.getLocations(LocationType.castle)).to.be.eql([expectedResult]);
         });
     });
 
@@ -66,7 +68,7 @@ describe('Place Controller tests', () => {
             placeController = new PlaceController(placeRepository, kingdomRepository);
 
             const expectedResult: Location = {
-                type: 'MultiPolygon',
+                type: CoordinateType.MultiPolygon,
                 coordinates: [
                     [1, 2],
                     [3, 4],
@@ -126,7 +128,7 @@ describe('Place Controller tests', () => {
 
         it('should return castles count of the kingdom', async () => {
             const count = 10;
-            when(kingdomRepositoryMock.countLocationsByKingdom(WINTERFELL_ID, 'Castle'))
+            when(kingdomRepositoryMock.countLocationsByKingdom(WINTERFELL_ID, 'castle'))
                 .thenReturn(Promise.resolve({count}));
             const placeRepository = instance(locationRepositoryMock);
             const kingdomRepository = instance(kingdomRepositoryMock);

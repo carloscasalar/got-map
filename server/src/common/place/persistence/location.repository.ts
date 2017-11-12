@@ -5,6 +5,7 @@ import { Location } from '../domain/location.model';
 import { LocationEntity } from './location.entity';
 import { LocationModelMapper } from '../config/location.model-mapper';
 import { ILocationRepository } from '../domain/location.repository';
+import { LocationType } from '../domain/location-type.enum';
 
 @Component()
 export class LocationRepository implements ILocationRepository {
@@ -12,7 +13,7 @@ export class LocationRepository implements ILocationRepository {
                 private readonly modelMapper: LocationModelMapper) {
     }
 
-    async getLocations(type: string): Promise<Location[]> {
+    async getLocations(type: LocationType): Promise<Location[]> {
         const locationQuery = `
                 SELECT ST_AsGeoJSON(geog) as geojson, name, type, gid
                 FROM locations
