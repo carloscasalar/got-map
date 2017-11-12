@@ -6,6 +6,8 @@ import { Location } from '../domain/location.model';
 import { LocationNotFoundException } from '../domain/location-not-found.exception';
 import { Count } from '../domain/kingdom.repository';
 import { IdValidatorPipe } from './validators/id.validator';
+import { LocationType } from '../domain/location-type.enum';
+import { LocationTypeValidatorPipe } from './validators/type.validator';
 
 @Controller()
 export class PlaceController {
@@ -14,7 +16,7 @@ export class PlaceController {
     }
 
     @Get('locations/:type')
-    async getLocations(@Param('type') type: string): Promise<Location[]> {
+    async getLocations(@Param('type', new LocationTypeValidatorPipe()) type: LocationType): Promise<Location[]> {
         const locations = await this.locationRepository.getLocations(type);
         if (locations.length === 0) {
             throw new LocationNotFoundException(type);
@@ -45,7 +47,7 @@ export class PlaceController {
 
     @Get('kingdoms/:id/castles')
     async countCastlesInKingdom(@Param('id', new IdValidatorPipe()) id: string): Promise<Count> {
-        const count = await this.kingdomRepository.countLocationsByKingdom(id, 'Castle');
+        const count = await this.kingdomRepository.countLocationsByKingdom(id, 'castle');
 
         return count;
     }
