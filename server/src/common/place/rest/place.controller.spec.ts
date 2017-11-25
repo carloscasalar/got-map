@@ -25,6 +25,7 @@ describe('Place Controller tests', () => {
         it('should call get all locations from repository', async () => {
             const result: Location = {
                 type: CoordinateType.Point,
+                summary: 'a summary',
                 coordinates: [
                     14.3312151315039,
                     -6.02925834324263
@@ -59,7 +60,7 @@ describe('Place Controller tests', () => {
                 ]
             }`);
             const size: Size = new Size(10);
-            const result: Kingdom = new Kingdom('id', 'Winterfell', size, boundaries);
+            const result: Kingdom = new Kingdom('id', 'Winterfell', size, 'a summary', boundaries);
 
             when(kingdomRepositoryMock.getAllKingdoms()).thenReturn(Promise.resolve([result]));
             const placeRepository = instance(locationRepositoryMock);
@@ -69,6 +70,7 @@ describe('Place Controller tests', () => {
 
             const expectedResult: Location = {
                 type: CoordinateType.MultiPolygon,
+                summary: 'a summary',
                 coordinates: [
                     [1, 2],
                     [3, 4],
@@ -93,7 +95,12 @@ describe('Place Controller tests', () => {
         it('should return kingdom size in Km2', async () => {
             const boundaries = new Boundaries(`{}`);
             const ONE_MILLION_SQUARE_METERS: Size = new Size(10 ** 6);
-            const winterfell: Kingdom = new Kingdom(WINTERFELL_ID, 'Winterfell', ONE_MILLION_SQUARE_METERS, boundaries);
+            const winterfell: Kingdom = new Kingdom(
+                WINTERFELL_ID,
+                'Winterfell',
+                ONE_MILLION_SQUARE_METERS,
+                'a summary',
+                boundaries);
 
             when(kingdomRepositoryMock.getKingdomById(WINTERFELL_ID)).thenReturn(Promise.resolve(winterfell));
             const placeRepository = instance(locationRepositoryMock);

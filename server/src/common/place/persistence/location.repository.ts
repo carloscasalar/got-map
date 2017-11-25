@@ -15,7 +15,7 @@ export class LocationRepository implements ILocationRepository {
 
     async getLocations(type: LocationType): Promise<Location[]> {
         const locationQuery = `
-                SELECT ST_AsGeoJSON(geog) as geojson, name, type, gid
+                SELECT ST_AsGeoJSON(geog) as geojson, name, type, gid, summary
                 FROM locations
                 WHERE UPPER(type) = UPPER($1);`;
         const {rows}: LocationQueryResult = await this.client.query(locationQuery, [type]);
