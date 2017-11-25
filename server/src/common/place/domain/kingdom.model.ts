@@ -8,6 +8,7 @@ export class Kingdom {
     constructor(public readonly id: string,
                 public readonly name: string,
                 public readonly size: Size,
+                public readonly summary: string,
                 public readonly boundaries: Boundaries = defaultBoundaries) {
     }
 
@@ -15,6 +16,7 @@ export class Kingdom {
         const id = this.id;
         const name = this.name;
         const properties = {id, name};
-        return Object.assign({}, this.boundaries, {properties});
+        const summary = this.summary;
+        return Object.assign({}, {summary}, this.boundaries, {properties});
     }
 }

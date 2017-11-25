@@ -14,7 +14,7 @@ export class KingdomRepository implements IKingdomRepository {
 
     async getAllKingdoms(): Promise<Kingdom[]> {
         const allKingdomsQuery = `
-                SELECT ST_AsGeoJSON(geog) as geojson, ST_AREA(geog) as size, name, gid
+                SELECT ST_AsGeoJSON(geog) as geojson, ST_AREA(geog) as size, name, gid, summary
                 FROM kingdoms;`;
         const result: KingdomQueryResult = await this.client.query(allKingdomsQuery);
         return result.rows.map(row => this.modelMapper.toKingdom(row));
@@ -22,7 +22,7 @@ export class KingdomRepository implements IKingdomRepository {
 
     async getKingdomById(id: string): Promise<Kingdom> {
         const kingdomByIdQuery = `
-                SELECT ST_AsGeoJSON(geog) as geojson, ST_AREA(geog) as size, name, gid
+                SELECT ST_AsGeoJSON(geog) as geojson, ST_AREA(geog) as size, name, gid, summary
                 FROM kingdoms
                 WHERE gid = $1
                 LIMIT(1);`;

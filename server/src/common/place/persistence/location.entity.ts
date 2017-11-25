@@ -3,4 +3,5 @@ export interface LocationEntity {
     name: string;
     type: string;
     gid: string;
+    summary: string;
 }

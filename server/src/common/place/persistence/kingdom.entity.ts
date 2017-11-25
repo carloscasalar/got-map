@@ -3,4 +3,5 @@ export interface KingdomEntity {
     name: string;
     geojson: string;
     size: number;
+    summary: string;
 }

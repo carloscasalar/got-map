@@ -9,6 +9,6 @@ export class KingdomModelMapper {
     public toKingdom(kingdomEntity: KingdomEntity): Kingdom {
         const boundaries: Boundaries = new Boundaries(kingdomEntity.geojson);
         const size: Size = new Size(kingdomEntity.size);
-        return new Kingdom(kingdomEntity.gid, kingdomEntity.name, size, boundaries);
+        return new Kingdom(kingdomEntity.gid, kingdomEntity.name, size, kingdomEntity.summary, boundaries);
     }
 }

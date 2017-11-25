@@ -5,6 +5,7 @@ export interface Location {
     type?: CoordinateType;
     coordinates?: number[]|Array<Array<number>>;
     properties: LocationProperties;
+    summary: string;
 }
 
 interface LocationProperties {
