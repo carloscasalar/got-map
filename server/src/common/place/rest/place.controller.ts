@@ -25,6 +25,16 @@ export class PlaceController {
         return locations;
     }
 
+    @Get('locations/:id/summary')
+    async getLocationSummary(@Param('id', new IdValidatorPipe()) id: string): Promise<string>  {
+        const location = await this.locationRepository.getLocationById(id);
+        if (!location) {
+            throw new LocationNotFoundException(id);
+        }
+
+        return location.summary;
+    }
+
     @Get('kingdoms-boundaries')
     async getKingdomsBoundaries(): Promise<Location[]> {
         const kingdoms = await this.kingdomRepository.getAllKingdoms();

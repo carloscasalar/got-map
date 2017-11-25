@@ -20,6 +20,9 @@ This endpoints returns a JSON with attribute `now` witch value is the database t
 #### /locations/:type
 Returns the list of locations of type `:type`.
 
+#### /locations/:id/summary
+Returns the summary of location with id `:id`.
+
 #### /kingdoms-boundaries
 Returns the list of kingdoms with each of its boundaries.
 
