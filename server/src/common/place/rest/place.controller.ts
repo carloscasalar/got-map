@@ -45,6 +45,16 @@ export class PlaceController {
         return kingdom.size.squareKilometers;
     }
 
+    @Get('kingdoms/:id/summary')
+    async getKingdomSummary(@Param('id', new IdValidatorPipe()) id: string): Promise<string> {
+        const kingdom = await this.kingdomRepository.getKingdomById(id);
+        if (!kingdom) {
+            throw new KingdomsNotFoundException();
+        }
+
+        return kingdom.summary;
+    }
+
     @Get('kingdoms/:id/castles')
     async countCastlesInKingdom(@Param('id', new IdValidatorPipe()) id: string): Promise<Count> {
         const count = await this.kingdomRepository.countLocationsByKingdom(id, 'castle');
