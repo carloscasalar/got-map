@@ -19,7 +19,7 @@
     "@types/pg": "^7.1.2",
     "dotenv": "^4.0.0",
     "pg": "^7.3.0",
-    "redis": "^2.7.1",
+    "redis": "^3.1.1",
     "reflect-metadata": "^0.1.10",
     "rxjs": "^5.4.0",
     "scribe-js": "^2.0.4",
